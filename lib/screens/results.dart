@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:markworker/screens/menu.dart';
 
 class ResultScreen extends StatefulWidget {
   @override
@@ -35,7 +36,10 @@ class _ResultScreenState extends State<ResultScreen> {
             top: 7.0.h,
             child: Container(
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MenuScreen()));
+                },
                 child: new Image(
                   image: AssetImage('assets/images/shared/bttn.png'),
                 ),

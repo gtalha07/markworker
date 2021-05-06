@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markworker/screens/menu.dart';
 import 'package:markworker/screens/play.dart';
 import 'package:sizer/sizer.dart';
 
@@ -62,7 +63,10 @@ class _LoseScreenState extends State<LoseScreen> {
               Container(
                 alignment: Alignment.center,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MenuScreen()));
+                  },
                   child: new Image(
                     image: AssetImage('assets/images/loseScreenImages/mm.png'),
                   ),
