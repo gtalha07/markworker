@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:markworker/screens/menu.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 bool _isSoundEnabled = true;
 bool _isMusicEnabled = true;
 bool _isLangChanged = true;
+bool _isMute = false;
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -12,8 +15,22 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  AudioPlayer _player = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+
+  Future<bool> _willPopCallback() async {
+    //change this whole thing
+    if (_isMute == false) {
+      setState(() {
+        _isMute = true;
+      });
+      _player.stop();
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
+    _willPopCallback();
     // double h = MediaQuery.of(context).size.height; //screen height
     // double w = MediaQuery.of(context).size.width; //screen width
     return Scaffold(
@@ -92,6 +109,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onTap: () {
                       setState(() {
                         _isMusicEnabled = !_isMusicEnabled;
+                        _isMute = !_isMute;
                       });
                     },
                     child: new Image(
