@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:markworker/screens/menu.dart';
 
@@ -36,14 +37,10 @@ class _ResultScreenState extends State<ResultScreen> {
             top: 7.0.h,
             child: Container(
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MenuScreen()));
-                },
-                child: new Image(
-                  image: AssetImage('assets/images/shared/bttn.png'),
-                ),
-              ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SvgPicture.asset('assets/images/shared/bttn.svg')),
             ),
           ),
           Column(

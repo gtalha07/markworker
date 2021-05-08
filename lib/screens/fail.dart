@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:markworker/screens/menu.dart';
 import 'package:markworker/screens/play.dart';
+// import 'package:markworker/screens/play.dart';
 import 'package:sizer/sizer.dart';
+import 'package:markworker/shared/variables.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 class LoseScreen extends StatefulWidget {
   @override
@@ -13,16 +16,18 @@ class _LoseScreenState extends State<LoseScreen> {
   Widget build(BuildContext context) {
     // double h = MediaQuery.of(context).size.height; //screen height
     // double w = MediaQuery.of(context).size.width; //screen width
-    return Container(
-      constraints: BoxConstraints.expand(),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/shared/field.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Stack(
+    return Scaffold(
+      body: Stack(
         children: <Widget>[
+          Container(
+            constraints: BoxConstraints.expand(),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/shared/field.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Container(
             constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(
@@ -44,7 +49,7 @@ class _LoseScreenState extends State<LoseScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 10.0.h),
+              SizedBox(height: 7.0.h),
               Container(
                 alignment: Alignment.center,
                 child: GestureDetector(
@@ -52,14 +57,24 @@ class _LoseScreenState extends State<LoseScreen> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => PlayScreen()));
                   },
-                  child: new Image(
-                    image: AssetImage(
-                      'assets/images/loseScreenImages/restart.png',
-                    ),
+                  child: Container(
+                    height: 10.0.h,
+                    width: 70.0.w,
+                    child: isLangChanged
+                        ? new Image(
+                            image: AssetImage(
+                              'assets/images/loseScreenImages/restart.png',
+                            ),
+                          )
+                        : new Image(
+                            image: AssetImage(
+                              'assets/images/loseScreenImages/restart_ru.png',
+                            ),
+                          ),
                   ),
                 ),
               ),
-              SizedBox(height: 8.0.h),
+              SizedBox(height: 7.0.h),
               Container(
                 alignment: Alignment.center,
                 child: GestureDetector(
@@ -67,8 +82,20 @@ class _LoseScreenState extends State<LoseScreen> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MenuScreen()));
                   },
-                  child: new Image(
-                    image: AssetImage('assets/images/loseScreenImages/mm.png'),
+                  child: Container(
+                    height: 10.0.h,
+                    width: 60.0.w,
+                    child: isLangChanged
+                        ? new Image(
+                            image: AssetImage(
+                              'assets/images/loseScreenImages/mm.png',
+                            ),
+                          )
+                        : new Image(
+                            image: AssetImage(
+                              'assets/images/loseScreenImages/mm_ru.png',
+                            ),
+                          ),
                   ),
                 ),
               ),
