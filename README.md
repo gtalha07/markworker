@@ -1,6 +1,6 @@
-# markworker
+# Mark Worker
 
-A new Flutter project.
+A simple Flutter Game.
 
 ## Getting Started
 
