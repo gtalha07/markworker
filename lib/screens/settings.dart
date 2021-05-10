@@ -46,7 +46,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => MenuScreen()));
                 },
-                child: SvgPicture.asset('assets/images/shared/bttn.svg'),
+                child: new Image(
+                  image: AssetImage('assets/images/shared/bttn.png'),
+                  height: 12.0.h,
+                  width: 16.0.w,
+                ),
               ),
             ),
           ),
@@ -57,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 child: isLangChanged
                     ? Text(
-                        'SETTINGS', //value subjected to change
+                        'SETTINGS',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14.0.sp,
@@ -65,7 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       )
                     : Text(
-                        'настройки', //value subjected to change
+                        'настройки',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14.0.sp,
@@ -77,46 +81,73 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 alignment: Alignment.center,
                 child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isSoundEnabled = !isSoundEnabled;
-                      });
-                    },
-                    child: isSoundEnabled
-                        ? SvgPicture.asset(
-                            'assets/images/settingScreenImages/s.svg')
-                        : SvgPicture.asset(
-                            'assets/images/settingScreenImages/no_s.svg')),
+                  onTap: () {
+                    setState(() {
+                      isSoundEnabled = !isSoundEnabled;
+                    });
+                  },
+                  child: isSoundEnabled
+                      ? new Image(
+                          image: AssetImage(
+                              'assets/images/settingScreenImages/s.png'),
+                          height: 10.0.h,
+                          width: 16.0.w,
+                        )
+                      : new Image(
+                          image: AssetImage(
+                              'assets/images/settingScreenImages/no_s.png'),
+                          height: 10.0.h,
+                          width: 16.0.w,
+                        ),
+                ),
               ),
-              SizedBox(height: 3.0.h),
+              SizedBox(height: 1.0.h),
               Container(
                 alignment: Alignment.center,
                 child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isMusicEnabled = !isMusicEnabled;
-                      });
-                    },
-                    child: isMusicEnabled
-                        ? SvgPicture.asset(
-                            'assets/images/settingScreenImages/music.svg')
-                        : SvgPicture.asset(
-                            'assets/images/settingScreenImages/no_music.svg')),
+                  onTap: () {
+                    setState(() {
+                      isMusicEnabled = !isMusicEnabled;
+                    });
+                  },
+                  child: isMusicEnabled
+                      ? new Image(
+                          image: AssetImage(
+                              'assets/images/settingScreenImages/music.png'),
+                          height: 10.0.h,
+                          width: 16.0.w,
+                        )
+                      : new Image(
+                          image: AssetImage(
+                              'assets/images/settingScreenImages/no_music.png'),
+                          height: 10.0.h,
+                          width: 16.0.w,
+                        ),
+                ),
               ),
-              SizedBox(height: 3.0.h),
+              SizedBox(height: 1.0.h),
               Container(
                 alignment: Alignment.center,
                 child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isLangChanged = !isLangChanged;
-                      });
-                    },
-                    child: isLangChanged
-                        ? SvgPicture.asset(
-                            'assets/images/settingScreenImages/eu.svg')
-                        : SvgPicture.asset(
-                            'assets/images/settingScreenImages/ru.svg')),
+                  onTap: () {
+                    setState(() {
+                      isLangChanged = !isLangChanged;
+                    });
+                  },
+                  child: isLangChanged
+                      ? new Image(
+                          image: AssetImage(
+                              'assets/images/settingScreenImages/en.png'),
+                          height: 10.0.h,
+                          width: 16.0.w,
+                        )
+                      : new Image(
+                          image: AssetImage(
+                              'assets/images/settingScreenImages/ru.png'),
+                          height: 10.0.h,
+                          width: 16.0.w,
+                        ),
+                ),
               ),
             ],
           )

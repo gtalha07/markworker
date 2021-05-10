@@ -16,92 +16,99 @@ class _LoseScreenState extends State<LoseScreen> {
   Widget build(BuildContext context) {
     // double h = MediaQuery.of(context).size.height; //screen height
     // double w = MediaQuery.of(context).size.width; //screen width
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            constraints: BoxConstraints.expand(),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/shared/field.png'),
-                fit: BoxFit.cover,
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Container(
+              constraints: BoxConstraints.expand(),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/shared/field.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Container(
-            constraints: BoxConstraints.expand(),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('assets/images/shared/worker_with_paint.png'),
-              fit: BoxFit.cover,
-            )),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 35.0.h),
-              Container(
-                child: Text(
-                  'YOUR SCORE: 123', //value subjected to change
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0.sp,
+            Container(
+              constraints: BoxConstraints.expand(),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('assets/images/shared/worker_with_paint.png'),
+                fit: BoxFit.cover,
+              )),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 35.0.h),
+                Container(
+                  child: Text(
+                    'YOUR SCORE: $score',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0.sp,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 7.0.h),
-              Container(
-                alignment: Alignment.center,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PlayScreen()));
-                  },
-                  child: Container(
-                    height: 10.0.h,
-                    width: 70.0.w,
-                    child: isLangChanged
-                        ? new Image(
-                            image: AssetImage(
-                              'assets/images/loseScreenImages/restart.png',
+                SizedBox(height: 7.0.h),
+                Container(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PlayScreen()));
+                    },
+                    child: Container(
+                      height: 10.0.h,
+                      width: 70.0.w,
+                      child: isLangChanged
+                          ? new Image(
+                              image: AssetImage(
+                                'assets/images/loseScreenImages/restart.png',
+                              ),
+                            )
+                          : new Image(
+                              image: AssetImage(
+                                'assets/images/loseScreenImages/restart_ru.png',
+                              ),
                             ),
-                          )
-                        : new Image(
-                            image: AssetImage(
-                              'assets/images/loseScreenImages/restart_ru.png',
-                            ),
-                          ),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 7.0.h),
-              Container(
-                alignment: Alignment.center,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MenuScreen()));
-                  },
-                  child: Container(
-                    height: 10.0.h,
-                    width: 60.0.w,
-                    child: isLangChanged
-                        ? new Image(
-                            image: AssetImage(
-                              'assets/images/loseScreenImages/mm.png',
+                SizedBox(height: 7.0.h),
+                Container(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MenuScreen()));
+                    },
+                    child: Container(
+                      height: 10.0.h,
+                      width: 60.0.w,
+                      child: isLangChanged
+                          ? new Image(
+                              image: AssetImage(
+                                'assets/images/loseScreenImages/mm.png',
+                              ),
+                            )
+                          : new Image(
+                              image: AssetImage(
+                                'assets/images/loseScreenImages/mm_ru.png',
+                              ),
                             ),
-                          )
-                        : new Image(
-                            image: AssetImage(
-                              'assets/images/loseScreenImages/mm_ru.png',
-                            ),
-                          ),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

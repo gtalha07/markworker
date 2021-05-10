@@ -35,21 +35,21 @@ class _OtpTimerState extends State<OtpTimer> {
     });
   }
 
-  void inc() async {
-    while (imageCounter < 5) {
-      // print(imgnumber);
-      await Future.delayed(Duration(seconds: secondCounter));
-      setState(() {
-        imageCounter++;
-        secondCounter -= 2;
-      });
-    }
-  }
+  // void inc() async {
+  //   while (imageCounter < 5) {
+  //     // print(imgnumber);
+  //     await Future.delayed(Duration(seconds: secondCounter));
+  //     setState(() {
+  //       imageCounter++;
+  //       secondCounter -= 2;
+  //     });
+  //   }
+  // }
 
   @override
   void initState() {
     startTimeout();
-    // inc();
+    // Pinc();
     super.initState();
   }
 
@@ -61,15 +61,17 @@ class _OtpTimerState extends State<OtpTimer> {
         Stack(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(right: 5.0.w),
-              child:
-                  SvgPicture.asset('assets/images/playScreenImages/time.svg'),
-            ),
+                padding: EdgeInsets.only(right: 5.0.w),
+                child: new Image(
+                  image: AssetImage('assets/images/playScreenImages/time.png'),
+                  height: 10.0.h,
+                  width: 20.0.w,
+                )),
             //     SizedBox(
             //   width: 5,
             // ),
             Container(
-              padding: EdgeInsets.fromLTRB(4.0.w, 1.0.h, 0.0, 0.0),
+              padding: EdgeInsets.fromLTRB(5.0.w, 4.0.h, 0.0, 0.0),
               child: Text(
                 timerText,
                 style: TextStyle(
