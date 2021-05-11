@@ -4,7 +4,8 @@ import 'package:sizer/sizer.dart';
 import 'package:markworker/screens/menu.dart';
 // import 'package:audioplayers/audio_cache.dart';
 // import 'package:audioplayers/audioplayers.dart';
-import 'package:markworker/shared/variables.dart';
+import 'package:markworker/shared/utils.dart';
+import 'package:markworker/services/audio.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -12,6 +13,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  void _playFile() async {
+    MusicPlayer.instance1.playMusic(bgMusic);
+  }
+
+  void _stopFile() async {
+    MusicPlayer.instance1.musicStop();
+  }
+
   @override
   Widget build(BuildContext context) {
     // _willPopCallback();
@@ -106,9 +115,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 alignment: Alignment.center,
                 child: GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isMusicEnabled = !isMusicEnabled;
-                    });
+                    if (isPlaying == false) {
+                      setState(() {
+                        isMusicEnabled = !isMusicEnabled;
+                        isPlaying = !isPlaying;
+                        _stopFile();
+                      });
+                    } else {
+                      setState(() {
+                        isMusicEnabled = !isMusicEnabled;
+                        isPlaying = !isPlaying;
+                        _playFile();
+                      });
+                    }
+                    print(isPlaying);
                   },
                   child: isMusicEnabled
                       ? new Image(

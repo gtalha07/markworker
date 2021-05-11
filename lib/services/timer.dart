@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:markworker/modals/level.dart';
+// import 'package:markworker/modals/level.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:markworker/screens/fail.dart';
 import 'package:sizer/sizer.dart';
-import 'package:markworker/shared/variables.dart';
+import 'package:markworker/shared/utils.dart';
+import 'package:markworker/services/audio.dart';
 
 class OtpTimer extends StatefulWidget {
   @override
@@ -16,6 +17,9 @@ class _OtpTimerState extends State<OtpTimer> {
   final interval = const Duration(seconds: 1);
   int timerMaxSeconds = secondCounter;
   int currentSeconds = 0;
+  void _playFile() async {
+    MusicPlayer.instance3.playLoseSound(loseSound);
+  }
 
   String get timerText =>
       '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
@@ -28,8 +32,11 @@ class _OtpTimerState extends State<OtpTimer> {
         currentSeconds = timer.tick;
         if (timer.tick >= timerMaxSeconds) {
           timer.cancel();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoseScreen()));
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => LoseScreen()));
+          if (isSoundEnabled == true) {
+            _playFile();
+          }
         }
       });
     });

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:markworker/screens/menu.dart';
 import 'package:markworker/screens/play.dart';
-// import 'package:markworker/screens/play.dart';
 import 'package:sizer/sizer.dart';
-import 'package:markworker/shared/variables.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
+import 'package:markworker/shared/utils.dart';
+import 'package:markworker/services/audio.dart';
 
 class LoseScreen extends StatefulWidget {
   @override
@@ -16,6 +15,10 @@ class _LoseScreenState extends State<LoseScreen> {
   Widget build(BuildContext context) {
     // double h = MediaQuery.of(context).size.height; //screen height
     // double w = MediaQuery.of(context).size.width; //screen width
+    void _playFile() async {
+      MusicPlayer.instance1.playMusic(bgMusic);
+    }
+
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
@@ -83,6 +86,11 @@ class _LoseScreenState extends State<LoseScreen> {
                   alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: () {
+                      if (isMusicEnabled == true) {
+                        setState(() {
+                          _playFile();
+                        });
+                      }
                       Navigator.push(
                           context,
                           MaterialPageRoute(
