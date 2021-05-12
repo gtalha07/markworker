@@ -32,8 +32,8 @@ class _OtpTimerState extends State<OtpTimer> {
         currentSeconds = timer.tick;
         if (timer.tick >= timerMaxSeconds) {
           timer.cancel();
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => LoseScreen()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoseScreen()));
           if (isSoundEnabled == true) {
             _playFile();
           }

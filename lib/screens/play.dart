@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:markworker/services/image_painter.dart';
+import 'package:markworker/services/imageClipper.dart';
 import 'package:markworker/services/timer.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,7 +16,7 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
-  final _offsets = <Offset>[];
+  List<Offset> points = <Offset>[];
   // ui.Image image;
   // Future loadImage(String path) async {
   //   final data = await rootBundle.load(path);
@@ -33,14 +33,6 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   Offset position = Offset(30.0.w, 70.0.h);
   double x, y;
   Random random = new Random();
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   if (state == AppLifecycleState.paused) {
-  //     _pauseFile();
-  //   } else if (state == AppLifecycleState.resumed) {
-  //     _resumeFile();
-  //   }
-  // }
 
   @override
   void initState() {
@@ -75,6 +67,25 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                 image: DecorationImage(
                   image: AssetImage('assets/images/shared/field.png'),
                   fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: new Image(
+                image: AssetImage(unfilledImages[0]),
+                height: 80.0.h,
+                width: 80.0.w,
+              ),
+            ),
+            Positioned(
+              top: 32.5.h,
+              left: 20.0.w,
+              child: ClipPath(
+                clipBehavior: Clip.hardEdge,
+                clipper: ImageClipper(),
+                child: CustomPaint(
+                  painter: Sketcher(points),
                 ),
               ),
             ),
@@ -120,58 +131,55 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                 OtpTimer(),
               ],
             ),
-            Container(
-              alignment: Alignment.center,
-              child: SvgPicture.asset(unfilledImages[imageCounter]),
-            ),
             Stack(
               children: <Widget>[
                 Positioned(
-                    left: x,
-                    top: y,
-                    child: GestureDetector(
-                      // onPanStart: (details) {
-                      //   _offsets.add(details.globalPosition);
-                      //   // setState(() {
-                      //   //   x = details.delta.dx;
-                      //   //   y = details.globalPosition.dy;
-                      //   // });
-                      // },
-                      onPanUpdate: (details) {
-                        _offsets.add(details.globalPosition);
-                        if (details.globalPosition.dy <= 10.0.h ||
-                            details.globalPosition.dx <= 20.0.w) {
-                          setState(() {
-                            x -= details.delta.dx;
-                            y -= details.delta.dy;
-                          });
-                        }
-                        print(details.globalPosition);
-                        if (details.globalPosition.dy >= h ||
-                            details.globalPosition.dx >= w - 10.0.w) {
-                          setState(() {
-                            x -= details.delta.dx;
-                            y -= details.delta.dy;
-                          });
-                        } else {
-                          setState(() {
-                            x += details.delta.dx;
-                            y += details.delta.dy;
-                          });
-                        }
-                      },
-                      onPanEnd: (details) {
-                        _offsets.add(null);
-                      },
-                      child: Container(
-                        child: new Image(
-                          image: AssetImage(
-                              'assets/images/playScreenImages/worker_with_paint.png'),
-                          height: 40.0.h,
-                          width: 40.0.w,
-                        ),
+                  left: x,
+                  top: y,
+                  child: GestureDetector(
+                    onPanUpdate: (details) {
+                      points.add(details.globalPosition);
+                      if (details.globalPosition.dy <= 10.0.h ||
+                          details.globalPosition.dx <= 20.0.w) {
+                        setState(() {
+                          RenderBox box = context.findRenderObject();
+                          Offset point =
+                              box.globalToLocal(details.globalPosition);
+                          point = point.translate(
+                              0.0, -(AppBar().preferredSize.height));
+
+                          points = List.from(points)..add(point);
+                          x -= details.delta.dx;
+                          y -= details.delta.dy;
+                        });
+                      }
+                      print(details.globalPosition);
+                      if (details.globalPosition.dy >= h ||
+                          details.globalPosition.dx >= w - 10.0.w) {
+                        setState(() {
+                          x -= details.delta.dx;
+                          y -= details.delta.dy;
+                        });
+                      } else {
+                        setState(() {
+                          x += details.delta.dx;
+                          y += details.delta.dy;
+                        });
+                      }
+                    },
+                    onPanEnd: (details) {
+                      points.add(null);
+                    },
+                    child: Container(
+                      child: new Image(
+                        image: AssetImage(
+                            'assets/images/playScreenImages/worker_with_paint.png'),
+                        height: 40.0.h,
+                        width: 40.0.w,
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
@@ -181,24 +189,29 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   }
 }
 
+class Sketcher extends CustomPainter {
+  final List<Offset> points;
 
-//  GestureDetector(
-//         onPanStart: (details) {
-//           print('globalPosition: ${details.globalPosition}');
-//           setState(() {
-//             _offsets.add(details.globalPosition);
-//           });
-//         },
-//         onPanUpdate: (details) {
-//           print('globalPosition: ${details.globalPosition}');
-//           setState(() {
-//             _offsets.add(details.globalPosition);
-//           });
-//         },
-//         onPanEnd: (details) {
-//           _offsets.add(null);
-//         },
+  Sketcher(this.points);
 
+  @override
+  bool shouldRepaint(Sketcher oldDelegate) {
+    return oldDelegate.points != points;
+  }
+
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = Colors.white
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 20.0;
+
+    for (int i = 0; i < points.length - 1; i++) {
+      if (points[i] != null && points[i + 1] != null) {
+        canvas.drawLine(points[i], points[i + 1], paint);
+      }
+    }
+  }
+}
 
 
 // Draggable(
