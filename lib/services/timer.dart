@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 // import 'package:markworker/modals/level.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
@@ -32,8 +31,8 @@ class _OtpTimerState extends State<OtpTimer> {
         currentSeconds = timer.tick;
         if (timer.tick >= timerMaxSeconds) {
           timer.cancel();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoseScreen()));
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => LoseScreen()));
           if (isSoundEnabled == true) {
             _playFile();
           }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:markworker/screens/menu.dart';
+import 'package:markworker/services/canvasPathState.dart';
+import 'package:markworker/services/painterCanvas.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:markworker/shared/utils.dart';
 import 'package:markworker/services/audio.dart';
@@ -28,27 +31,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-  // AudioCache audioCache = AudioCache();
-  // Future<bool> _willPopCallback() async {
-  //   if (isPlaying == false) {
-  //     setState(() {
-  //       isPlaying = true;
-  //     });
-  //     audioPlayer.stop();
-  //   }
-  //   return true;
-  // }
-
-  // openingActions() async {
-  //   audioPlayer = await audioCache.loop('music/background music.mp3');
-  // }
-
-  // @override
-  // void initState() {
-  //   openingActions();
-  //   super.initState();
-  // }
   void _playFile() async {
     MusicPlayer.instance1.playMusic(bgMusic);
   }
