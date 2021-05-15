@@ -94,14 +94,16 @@ class CurrentPathPaint extends StatelessWidget {
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onPanStart: (details) {
-              currentPointsState.addPoint(details.globalPosition);
+              currentPointsState.addPoint(details.localPosition);
 
               // Added it twice so that if the user draws just a single dot, it can register
 
-              currentPointsState.addPoint(details.globalPosition);
+              currentPointsState.addPoint(details.localPosition);
             },
-            onPanUpdate: (details) =>
-                currentPointsState.addPoint(details.localPosition),
+            onPanUpdate: (details) {
+              currentPointsState.addPoint(details.localPosition);
+              // mainPointsState.addPath(currentPointsState.points);
+            },
             onPanEnd: (details) {
               mainPointsState.addPath(currentPointsState.points);
               currentPointsState.resetPoints();

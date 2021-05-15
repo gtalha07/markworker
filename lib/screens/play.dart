@@ -1,18 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:markworker/services/canvasPathState.dart';
-import 'package:markworker/services/imageClipper.dart';
+
 import 'package:markworker/services/painterCanvas.dart';
 import 'package:markworker/services/timer.dart';
-import 'package:path_drawing/path_drawing.dart';
+
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:markworker/shared/utils.dart';
 import 'package:markworker/services/audio.dart';
 // import 'dart:ui' as ui;
-import 'dart:math';
 
 // import 'dart:async';
 
@@ -23,23 +22,17 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   List<Offset> points = <Offset>[];
-  // ui.Image image;
-  // Future loadImage(String path) async {
-  //   final data = await rootBundle.load(path);
-  //   final bytes = data.buffer.asUint8List();
-  //   final image = await decodeImageFromList(bytes);
-  //   if (mounted) {
-  //     setState(() => this.image = image);
-  //   }
-  // }
   void _stopFile() async {
     MusicPlayer.instance1.musicStop();
   }
 
+  Offset position = Offset(150.0, 700.0);
   double x, y;
   @override
   void initState() {
     super.initState();
+    x = position.dx;
+    y = position.dy;
     // WidgetsBinding.instance.addObserver(this);
     _stopFile();
   }
@@ -52,10 +45,10 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    double statusBarHeight = MediaQuery.of(context).padding.top;
-    double h =
-        MediaQuery.of(context).size.height - statusBarHeight; //screen height
-    double w = MediaQuery.of(context).size.width; //screen width
+    // double statusBarHeight = MediaQuery.of(context).padding.top;
+    // double h =
+    //     MediaQuery.of(context).size.height - statusBarHeight; //screen height
+    // double w = MediaQuery.of(context).size.width; //screen width
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
@@ -188,3 +181,39 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
 //                       }
 //                     },
 //                   ),
+
+
+// GestureDetector(
+//                     onPanUpdate: (details) {
+//                       points.add(details.globalPosition);
+//                       if (details.globalPosition.dy <= 10.0.h ||
+//                           details.globalPosition.dx <= 20.0.w) {
+//                         setState(() {
+//                           RenderBox box = context.findRenderObject();
+//                           Offset point =
+//                               box.globalToLocal(details.globalPosition);
+//                           point = point.translate(
+//                               0.0, -(AppBar().preferredSize.height));
+
+//                           points = List.from(points)..add(point);
+//                           x -= details.delta.dx;
+//                           y -= details.delta.dy;
+//                         });
+//                       }
+//                       print(details.globalPosition);
+//                       if (details.globalPosition.dy >= h ||
+//                           details.globalPosition.dx >= w - 10.0.w) {
+//                         setState(() {
+//                           x -= details.delta.dx;
+//                           y -= details.delta.dy;
+//                         });
+//                       } else {
+//                         setState(() {
+//                           x += details.delta.dx;
+//                           y += details.delta.dy;
+//                         });
+//                       }
+//                     },
+//                     onPanEnd: (details) {
+//                       points.add(null);
+//                     },

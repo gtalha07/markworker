@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:markworker/shared/utils.dart';
 import 'package:sizer/sizer.dart';
 // import 'package:markworker/screens/menu.dart';
 
@@ -56,12 +57,11 @@ class _ResultScreenState extends State<ResultScreen> {
                 children: <Widget>[
                   Positioned(
                     top: 20.0.h,
-                    left: 20.0.w,
-                    child: new Image(
-                      image: AssetImage(
-                          'assets/images/playScreenImages/timer.png'),
-                      height: 20.0.h,
-                      width: 20.0.w,
+                    left: 17.0.w,
+                    child: SvgPicture.asset(
+                      unfilledImages[0],
+                      height: 15.0.h,
+                      width: 15.0.w,
                     ),
                   ),
                   Positioned(
@@ -75,38 +75,16 @@ class _ResultScreenState extends State<ResultScreen> {
                     ),
                   ),
                   Positioned(
-                    top: 18.0.h,
-                    left: 60.0.w,
-                    child: new Image(
-                      image:
-                          AssetImage('assets/images/playScreenImages/cup.png'),
-                      height: 25.0.h,
-                      width: 25.0.w,
-                    ),
-                  ),
+                      top: 22.0.h,
+                      left: 58.0.w,
+                      child: SvgPicture.asset(
+                        unfilledImages[1],
+                        height: 14.0.h,
+                        width: 14.0.w,
+                      )),
                   Positioned(
-                    top: 30.0.h,
-                    left: 62.0.w,
-                    child: new Image(
-                      image:
-                          AssetImage('assets/images/playScreenImages/time.png'),
-                      width: 20.0.w,
-                      height: 20.0.h,
-                    ),
-                  ),
-                  Positioned(
-                    top: 45.0.h,
-                    left: 10.0.w,
-                    child: new Image(
-                      image:
-                          AssetImage('assets/images/playScreenImages/ball.png'),
-                      height: 20.0.h,
-                      width: 20.0.w,
-                    ),
-                  ),
-                  Positioned(
-                    top: 58.0.h,
-                    left: 10.0.w,
+                    top: 31.0.h,
+                    left: 65.0.w,
                     child: new Image(
                       image:
                           AssetImage('assets/images/playScreenImages/time.png'),
@@ -115,17 +93,33 @@ class _ResultScreenState extends State<ResultScreen> {
                     ),
                   ),
                   Positioned(
-                    top: 48.0.h,
-                    left: 45.0.w,
+                      top: 48.0.h,
+                      left: 10.0.w,
+                      child: SvgPicture.asset(
+                        unfilledImages[2],
+                        height: 13.0.h,
+                        width: 13.0.w,
+                      )),
+                  Positioned(
+                    top: 56.0.h,
+                    left: 12.0.w,
                     child: new Image(
                       image:
-                          AssetImage('assets/images/playScreenImages/flag.png'),
-                      height: 16.0.h,
-                      width: 16.0.w,
+                          AssetImage('assets/images/playScreenImages/time.png'),
+                      width: 20.0.w,
+                      height: 20.0.h,
                     ),
                   ),
                   Positioned(
-                    top: 58.0.h,
+                      top: 49.0.h,
+                      left: 48.0.w,
+                      child: SvgPicture.asset(
+                        unfilledImages[4],
+                        height: 13.0.h,
+                        width: 13.0.w,
+                      )),
+                  Positioned(
+                    top: 57.0.h,
                     left: 42.0.w,
                     child: new Image(
                       image:
@@ -135,18 +129,16 @@ class _ResultScreenState extends State<ResultScreen> {
                     ),
                   ),
                   Positioned(
-                    top: 50.0.h,
-                    left: 75.0.w,
-                    child: new Image(
-                      image: AssetImage(
-                          'assets/images/playScreenImages/whistle.png'),
-                      height: 16.0.h,
-                      width: 16.0.w,
-                    ),
-                  ),
+                      top: 50.0.h,
+                      right: 5.0.w,
+                      child: SvgPicture.asset(
+                        unfilledImages[3],
+                        height: 15.0.h,
+                        width: 15.0.w,
+                      )),
                   Positioned(
-                    top: 60.0.h,
-                    left: 75.0.w,
+                    top: 59.0.h,
+                    right: 5.0.w,
                     child: new Image(
                       image:
                           AssetImage('assets/images/playScreenImages/time.png'),
