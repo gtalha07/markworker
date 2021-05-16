@@ -65,7 +65,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              DrawzoCanvas(),
+              Align(alignment: Alignment.center, child: DrawzoCanvas()),
               Row(
                 children: <Widget>[
                   Stack(

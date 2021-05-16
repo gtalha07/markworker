@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:markworker/screens/menu.dart';
 import 'package:markworker/services/canvasPathState.dart';
@@ -20,6 +21,7 @@ class _Handler extends WidgetsBindingObserver {
 }
 
 void main() {
+  debugPrintGestureArenaDiagnostics = true;
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
   WidgetsBinding.instance.addObserver(new _Handler());

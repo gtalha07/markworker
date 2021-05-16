@@ -1,46 +1,61 @@
 import 'dart:ui';
-
+import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:markworker/services/canvasPathState.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:markworker/services/imageClipper.dart';
 import 'package:markworker/shared/utils.dart';
-import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
 
-class OnlyOnePointerRecognizer extends OneSequenceGestureRecognizer {
-  int _p = 0;
-  @override
-  void addPointer(PointerDownEvent event) {
-    startTrackingPointer(event.pointer);
-    if (_p == 0) {
-      resolve(GestureDisposition.rejected);
-      _p = event.pointer;
-    } else {
-      resolve(GestureDisposition.accepted);
-    }
-  }
+// class OnlyOnePointerRecognizer extends OneSequenceGestureRecognizer {
+//   int _p = 0;
+//   @override
+//   void addPointer(PointerDownEvent event) {
+//     startTrackingPointer(event.pointer);
+//     if (_p == 0) {
+//       resolve(GestureDisposition.rejected);
+//       _p = event.pointer;
+//     } else {
+//       resolve(GestureDisposition.accepted);
+//     }
+//   }
 
-  @override
-  String get debugDescription => 'only one pointer recognizer';
+//   @override
+//   String get debugDescription => 'only one pointer recognizer';
 
-  @override
-  void didStopTrackingLastPointer(int pointer) {}
+//   @override
+//   void didStopTrackingLastPointer(int pointer) {}
 
-  @override
-  void handleEvent(PointerEvent event) {
-    if (!event.down && event.pointer == _p) {
-      _p = 0;
-    }
-  }
-}
+//   @override
+//   void handleEvent(PointerEvent event) {
+//     if (!event.down && event.pointer == _p) {
+//       _p = 0;
+//     }
+//   }
+// }
 
-class CurrentPathPaint extends StatelessWidget {
+class CurrentPathPaint extends StatefulWidget {
   const CurrentPathPaint();
 
   @override
+  _CurrentPathPaintState createState() => _CurrentPathPaintState();
+}
+
+class _CurrentPathPaintState extends State<CurrentPathPaint> {
+  double x, y;
+  Offset position = Offset(150.0, 700.0);
+  List<Offset> points = <Offset>[];
+  @override
+  void initState() {
+    super.initState();
+    x = position.dx;
+    y = position.dy;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // double h = MediaQuery.of(context).size.height;
+    // double w = MediaQuery.of(context).size.width;
     double _getHeight() {
       if (imageCounter == 0) {
         return MediaQuery.of(context).size.height / 2.8;
@@ -77,38 +92,53 @@ class CurrentPathPaint extends StatelessWidget {
       builder: (_, model, child) => Stack(
         fit: StackFit.expand,
         children: [
-          RepaintBoundary(
-              child: CustomPaint(
-            isComplex: true,
-            painter: CurrentPathPainter(model.points),
-            child: Container(),
-          )),
-          child
+          // RepaintBoundary(
+          //     child: CustomPaint(
+          //   isComplex: true,
+          //   painter: CurrentPathPainter(model.points),
+          //   child: Container(),
+          // )),
+          child,
+          Positioned(
+            top: y,
+            left: x,
+            child: SvgPicture.asset(playChar),
+          ),
         ],
       ),
       child: Align(
         alignment: Alignment.center,
-        child: SizedBox(
-          height: _getHeight(),
-          width: _getWidth(),
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onPanStart: (details) {
-              currentPointsState.addPoint(details.localPosition);
+        child: Stack(
+          children: [
+            SizedBox(
+              height: _getHeight(),
+              width: _getWidth(),
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onPanStart: (details) {
+                  currentPointsState.addPoint(details.localPosition);
+                  // Added it twice so that if the user draws just a single dot, it can register
 
-              // Added it twice so that if the user draws just a single dot, it can register
-
-              currentPointsState.addPoint(details.localPosition);
-            },
-            onPanUpdate: (details) {
-              currentPointsState.addPoint(details.localPosition);
-              // mainPointsState.addPath(currentPointsState.points);
-            },
-            onPanEnd: (details) {
-              mainPointsState.addPath(currentPointsState.points);
-              currentPointsState.resetPoints();
-            },
-          ),
+                  currentPointsState.addPoint(details.localPosition);
+                  setState(() {
+                    x = details.globalPosition.dx;
+                    y = details.globalPosition.dy;
+                  });
+                },
+                onPanUpdate: (details) {
+                  currentPointsState.addPoint(details.localPosition);
+                  setState(() {
+                    x += details.delta.dx;
+                    y += details.delta.dy;
+                  });
+                },
+                onPanEnd: (details) {
+                  mainPointsState.addPath(currentPointsState.points);
+                  currentPointsState.resetPoints();
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

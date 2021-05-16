@@ -29,3 +29,4 @@ int secondCounter = 200;
 bool isPainted = false;
 String bgMusic = 'music/background music.mp3';
 String loseSound = 'music/time is over.mp3';
+String playChar = 'assets/images/playScreenImages/worker_with_paint.svg';
