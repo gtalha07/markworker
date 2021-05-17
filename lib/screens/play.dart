@@ -22,19 +22,14 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   List<Offset> points = <Offset>[];
-  void _stopFile() async {
-    MusicPlayer.instance1.musicStop();
+  void _pauseFile() async {
+    MusicPlayer.instance1.pauseMusic();
   }
 
-  Offset position = Offset(150.0, 700.0);
-  double x, y;
   @override
   void initState() {
     super.initState();
-    x = position.dx;
-    y = position.dy;
-    // WidgetsBinding.instance.addObserver(this);
-    _stopFile();
+    _pauseFile();
   }
 
   // @override
@@ -45,10 +40,6 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    // double statusBarHeight = MediaQuery.of(context).padding.top;
-    // double h =
-    //     MediaQuery.of(context).size.height - statusBarHeight; //screen height
-    // double w = MediaQuery.of(context).size.width; //screen width
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
@@ -65,7 +56,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              Align(alignment: Alignment.center, child: DrawzoCanvas()),
+              DrawzoCanvas(),
               Row(
                 children: <Widget>[
                   Stack(

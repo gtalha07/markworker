@@ -46,10 +46,10 @@ class DrawzoCanvasPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..strokeWidth = 35.0
+      ..strokeWidth = 40.0
       ..color = Colors.white
-      ..strokeCap = StrokeCap.square
-      ..strokeJoin = StrokeJoin.bevel;
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
     for (final pointsSet in points) {
       canvas.drawPoints(PointMode.polygon, pointsSet, paint);
     }

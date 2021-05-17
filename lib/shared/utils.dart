@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
+
 // import 'package:path_drawing/path_drawing.dart';
 // import 'package:flutter/material.dart';
 
@@ -24,9 +26,9 @@ List<String> filledImages = [
 ];
 Random random = new Random();
 int score = 0;
-int imageCounter = 1;
-int secondCounter = 200;
-bool isPainted = false;
+int imageCounter = random.nextInt(4);
+int secondCounter = 90;
 String bgMusic = 'music/background music.mp3';
 String loseSound = 'music/time is over.mp3';
-String playChar = 'assets/images/playScreenImages/worker_with_paint.svg';
+String playChar = 'assets/images/playScreenImages/worker.svg';
+double x, y;

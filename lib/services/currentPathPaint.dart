@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:sizer/sizer.dart';
+// import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:markworker/services/canvasPathState.dart';
 import 'package:flutter/gestures.dart';
@@ -42,9 +42,9 @@ class CurrentPathPaint extends StatefulWidget {
 }
 
 class _CurrentPathPaintState extends State<CurrentPathPaint> {
-  double x, y;
   Offset position = Offset(150.0, 700.0);
   List<Offset> points = <Offset>[];
+  double x, y;
   @override
   void initState() {
     super.initState();
@@ -54,8 +54,6 @@ class _CurrentPathPaintState extends State<CurrentPathPaint> {
 
   @override
   Widget build(BuildContext context) {
-    // double h = MediaQuery.of(context).size.height;
-    // double w = MediaQuery.of(context).size.width;
     double _getHeight() {
       if (imageCounter == 0) {
         return MediaQuery.of(context).size.height / 2.8;
@@ -88,6 +86,7 @@ class _CurrentPathPaintState extends State<CurrentPathPaint> {
         Provider.of<CurrentPathState>(context, listen: false);
     CanvasPathsState mainPointsState =
         Provider.of<CanvasPathsState>(context, listen: false);
+
     return Consumer<CurrentPathState>(
       builder: (_, model, child) => Stack(
         fit: StackFit.expand,
@@ -102,43 +101,41 @@ class _CurrentPathPaintState extends State<CurrentPathPaint> {
           Positioned(
             top: y,
             left: x,
-            child: SvgPicture.asset(playChar),
+            child: Transform.rotate(
+                angle: 89.55, child: SvgPicture.asset(playChar)),
           ),
         ],
       ),
       child: Align(
         alignment: Alignment.center,
-        child: Stack(
-          children: [
-            SizedBox(
-              height: _getHeight(),
-              width: _getWidth(),
-              child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onPanStart: (details) {
-                  currentPointsState.addPoint(details.localPosition);
-                  // Added it twice so that if the user draws just a single dot, it can register
+        child: SizedBox(
+          height: _getHeight(),
+          width: _getWidth(),
+          child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onPanStart: (details) {
+              currentPointsState.addPoint(details.localPosition);
+              // Added it twice so that if the user draws just a single dot, it can register
 
-                  currentPointsState.addPoint(details.localPosition);
-                  setState(() {
-                    x = details.globalPosition.dx;
-                    y = details.globalPosition.dy;
-                  });
-                },
-                onPanUpdate: (details) {
-                  currentPointsState.addPoint(details.localPosition);
-                  setState(() {
-                    x += details.delta.dx;
-                    y += details.delta.dy;
-                  });
-                },
-                onPanEnd: (details) {
-                  mainPointsState.addPath(currentPointsState.points);
-                  currentPointsState.resetPoints();
-                },
-              ),
-            ),
-          ],
+              currentPointsState.addPoint(details.localPosition);
+              setState(() {
+                x = details.globalPosition.dx;
+                y = details.globalPosition.dy;
+              });
+              print(x);
+              print(y);
+            },
+            onPanUpdate: (details) {
+              currentPointsState.addPoint(details.localPosition);
+              x = details.globalPosition.dx;
+              y = details.globalPosition.dy;
+              // currPoints.add(Offset(x, y));
+            },
+            onPanEnd: (details) {
+              mainPointsState.addPath(currentPointsState.points);
+              currentPointsState.resetPoints();
+            },
+          ),
         ),
       ),
     );

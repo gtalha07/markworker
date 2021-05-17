@@ -15,8 +15,8 @@ class _LoseScreenState extends State<LoseScreen> {
   Widget build(BuildContext context) {
     // double h = MediaQuery.of(context).size.height; //screen height
     // double w = MediaQuery.of(context).size.width; //screen width
-    void _playFile() async {
-      MusicPlayer.instance1.playMusic(bgMusic);
+    void _resumeFile() async {
+      MusicPlayer.instance1.resumeMusic(bgMusic);
     }
 
     return WillPopScope(
@@ -88,7 +88,7 @@ class _LoseScreenState extends State<LoseScreen> {
                     onTap: () {
                       if (isMusicEnabled == true) {
                         setState(() {
-                          _playFile();
+                          _resumeFile();
                         });
                       }
                       Navigator.push(

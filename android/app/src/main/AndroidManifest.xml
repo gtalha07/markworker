@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.markworker">
    <application
-        android:label="markworker"
+        android:label="Markworker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
