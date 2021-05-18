@@ -36,7 +36,7 @@ class _OtpTimerState extends State<OtpTimer> {
           if (isSoundEnabled == true) {
             _playFile();
           }
-          imageCounter = random.nextInt(4);
+          imageCounter = random.nextInt(5);
         }
       });
     });

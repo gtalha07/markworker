@@ -1,5 +1,6 @@
 import 'dart:ui';
 // import 'package:sizer/sizer.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:markworker/services/canvasPathState.dart';
 import 'package:flutter/gestures.dart';
@@ -91,12 +92,12 @@ class _CurrentPathPaintState extends State<CurrentPathPaint> {
       builder: (_, model, child) => Stack(
         fit: StackFit.expand,
         children: [
-          // RepaintBoundary(
-          //     child: CustomPaint(
-          //   isComplex: true,
-          //   painter: CurrentPathPainter(model.points),
-          //   child: Container(),
-          // )),
+          RepaintBoundary(
+              child: CustomPaint(
+            isComplex: true,
+            painter: CurrentPathPainter(model.points),
+            child: Container(),
+          )),
           child,
           Positioned(
             top: y,
@@ -122,14 +123,14 @@ class _CurrentPathPaintState extends State<CurrentPathPaint> {
                 x = details.globalPosition.dx;
                 y = details.globalPosition.dy;
               });
-              print(x);
-              print(y);
             },
             onPanUpdate: (details) {
               currentPointsState.addPoint(details.localPosition);
               x = details.globalPosition.dx;
               y = details.globalPosition.dy;
               // currPoints.add(Offset(x, y));
+              print(x);
+              print(y);
             },
             onPanEnd: (details) {
               mainPointsState.addPath(currentPointsState.points);
@@ -159,6 +160,8 @@ class CurrentPathPainter extends CustomPainter {
     canvas.drawPoints(PointMode.polygon, points, paint);
   }
 
+  @override
+  bool hitTest(Offset position) => null;
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
