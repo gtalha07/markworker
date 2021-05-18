@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.markworker">
+    package="com.app.markworker">
    <application
         android:label="Markworker"
         android:icon="@mipmap/ic_launcher">
