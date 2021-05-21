@@ -35,7 +35,7 @@ class DrawzoCanvas extends StatelessWidget {
             create: (_) => CurrentPathState(), // We just made this,
             child: const CurrentPathPaint() // We need to make this
             ));
-  }
+  } //misc
 }
 
 class DrawzoCanvasPainter extends CustomPainter {
