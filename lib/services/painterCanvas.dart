@@ -33,8 +33,7 @@ class DrawzoCanvas extends StatelessWidget {
             ]),
         child: ChangeNotifierProvider(
             create: (_) => CurrentPathState(), // We just made this,
-            child: const CurrentPathPaint() // We need to make this
-            ));
+            child: const CurrentPathPaint()));
   } //misc
 }
 
