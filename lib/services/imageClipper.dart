@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:markworker/shared/utils.dart';
 import 'package:path_drawing/path_drawing.dart';
-// import 'package:svg_path_parser/svg_path_parser.dart';
 
 class ImageClipper extends CustomClipper<Path> {
   Path _getTimerPath() {
