@@ -74,9 +74,6 @@ class _OtpTimerState extends State<OtpTimer> {
                   height: 10.0.h,
                   width: 20.0.w,
                 )),
-            //     SizedBox(
-            //   width: 5,
-            // ),
             Container(
               padding: EdgeInsets.fromLTRB(5.0.w, 4.0.h, 0.0, 0.0),
               child: Text(
