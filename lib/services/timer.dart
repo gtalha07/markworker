@@ -40,17 +40,6 @@ class _OtpTimerState extends State<OtpTimer> {
     });
   }
 
-  // void inc() async {
-  //   while (imageCounter < 5) {
-  //     // print(imgnumber);
-  //     await Future.delayed(Duration(seconds: secondCounter));
-  //     setState(() {
-  //       imageCounter++;
-  //       secondCounter -= 2;
-  //     });
-  //   }
-  // }
-
   @override
   void initState() {
     startTimeout();
