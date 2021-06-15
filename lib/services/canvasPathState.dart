@@ -10,7 +10,6 @@ class CanvasPathsState extends ChangeNotifier {
   List<List<Offset>> get points => _points;
 
   addPath(List<Offset> path) {
-    // Add the path that was just drawn
     _points.add(path);
 
     // Trigger a rebuild on the canvas
