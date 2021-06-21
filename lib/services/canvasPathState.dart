@@ -27,7 +27,6 @@ class CurrentPathState with ChangeNotifier {
   List<Offset> get points => _points;
 
   addPoint(Offset point) {
-    // Add the current path
     _points.add(point);
 
     // Trigger a rebuild on the widget drawing the
