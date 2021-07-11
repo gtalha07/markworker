@@ -1,9 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:markworker/screens/menu.dart';
-import 'package:markworker/services/canvasPathState.dart';
-import 'package:markworker/services/painterCanvas.dart';
-import 'package:provider/provider.dart';
+
 import 'package:sizer/sizer.dart';
 import 'package:markworker/shared/utils.dart';
 import 'package:markworker/services/audio.dart';
