@@ -1,8 +1,5 @@
 import 'dart:math';
 
-// import 'package:path_drawing/path_drawing.dart';
-// import 'package:flutter/material.dart';
-
 bool isSoundEnabled = true;
 bool isMusicEnabled = true;
 bool isLangChanged = true;
@@ -15,13 +12,6 @@ List<String> unfilledImages = [
   'assets/images/playScreenImages/whistle.svg',
   'assets/images/playScreenImages/flag.svg',
 ];
-// List<String> filledImages = [
-//   'assets/images/playScreenImages/timer_p.svg',
-//   'assets/images/playScreenImages/cup_p.svg',
-//   'assets/images/playScreenImages/ball_p.svg',
-//   'assets/images/playScreenImages/whistle_p.svg'
-//       'assets/images/playScreenImages/flag_p.svg'
-// ];
 Random random = new Random();
 int score = 0;
 int imageCounter = random.nextInt(5);

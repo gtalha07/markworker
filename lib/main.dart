@@ -4,7 +4,6 @@ import 'package:markworker/screens/menu.dart';
 import 'package:sizer/sizer.dart';
 import 'package:markworker/shared/utils.dart';
 import 'package:markworker/services/audio.dart';
-import 'package:flutter/services.dart';
 
 class _Handler extends WidgetsBindingObserver {
   @override
