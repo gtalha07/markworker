@@ -17,7 +17,6 @@ class _Handler extends WidgetsBindingObserver {
 }
 
 void main() {
-  // debugPrintGestureArenaDiagnostics = true;
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
   WidgetsBinding.instance.addObserver(new _Handler());
